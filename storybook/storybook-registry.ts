@@ -1,1 +1,1 @@
-require("../app/components/auto-image/auto-image.story")
+require("../app/components/Image/Image.story")
