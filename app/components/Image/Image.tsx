@@ -8,7 +8,7 @@ const LOADER_COLOR = "rgba(55, 107, 251, 1)"
 
 interface Props extends FastImageProps {
   onPress?: () => void
-  containerStyle?: ViewStyle
+  containerStyle?: ViewStyle | ViewStyle[]
 }
 const Image = ({ style, containerStyle, onPress, ...restProps }: Props) => {
   const [loaded, setLoaded] = useState(false)

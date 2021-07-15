@@ -14,6 +14,7 @@ interface Props {
   style?: ViewStyle
   size?: "small" | "medium" | "large"
   shape?: "square" | "circle" | "round"
+  onPress?: () => void
 }
 
 const Avatar = ({
@@ -22,11 +23,15 @@ const Avatar = ({
   resizeMode = "contain",
   size = "medium",
   shape = "square",
+  onPress,
 }: Props) => {
   return (
-    <View style={[styles.base, sizeStyle[size], shapeStyle(shape, size), style]}>
-      <Image source={source} resizeMode={resizeMode} />
-    </View>
+    <Image
+      containerStyle={[styles.base, sizeStyle[size], shapeStyle(shape, size), style]}
+      source={source}
+      resizeMode={resizeMode}
+      onPress={onPress}
+    />
   )
 }
 
