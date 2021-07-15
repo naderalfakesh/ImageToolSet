@@ -1,19 +1,17 @@
-/* eslint-disable react-native/no-unused-styles */
 import React, { useState } from "react"
 import { Dimensions, Modal, StyleSheet, View, Text, StatusBar } from "react-native"
-import { FastImageProps } from "react-native-fast-image"
 import ImageZoom from "react-native-image-pan-zoom"
 import Image from "../Image"
 
 interface Props {
-  source: FastImageProps["source"]
+  url: string
   title: string
   visible: boolean
   onClose: () => void
   onPress: () => void
 }
 
-const ImageViewer = ({ source, visible, title, onClose, onPress }: Props) => {
+const ImageViewer = ({ url, visible, title, onClose, onPress }: Props) => {
   const [imageSize, setImageSize] = useState({ width: 0, height: 0 })
 
   return (
@@ -34,7 +32,7 @@ const ImageViewer = ({ source, visible, title, onClose, onPress }: Props) => {
         maxOverflow={0}
       >
         <Image
-          source={source}
+          url={url}
           resizeMode="contain"
           onLoad={({ nativeEvent: { height, width } }) => {
             setImageSize({ height, width })

@@ -4,20 +4,20 @@ import { StoryScreen, Story, UseCase } from "../../../storybook/views"
 import InputField from "./InputField"
 import { useState } from "@storybook/addons"
 
-const IMAGE = { uri: "https://rickandmortyapi.com/api/character/avatar/2.jpeg" }
+const IMAGE = "https://rickandmortyapi.com/api/character/avatar/2.jpeg"
 
 storiesOf("Input field", module)
   .addDecorator((fn) => <StoryScreen>{fn()}</StoryScreen>)
   .add("Default", () => {
-    const [source, setSource] = useState<{ uri: string } | null>(null)
+    const [url, setUrl] = useState<string | null>(null)
 
     return (
       <Story>
         <UseCase text="With URL">
           <InputField
-            source={source}
+            url={url}
             onPress={() => {
-              source ? setSource(null) : setSource(IMAGE)
+              url ? setUrl(null) : setUrl(IMAGE)
             }}
           />
         </UseCase>

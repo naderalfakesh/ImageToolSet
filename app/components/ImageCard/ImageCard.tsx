@@ -1,20 +1,18 @@
-/* eslint-disable react-native/no-unused-styles */
 import React from "react"
 import { StyleSheet, View, ViewStyle, Text } from "react-native"
-import { FastImageProps } from "react-native-fast-image"
 import Image from "../Image"
 
 interface Props {
   style?: ViewStyle
-  source: FastImageProps["source"]
+  url: string
   title: string
   description: string
 }
 
-const ImageCard = ({ style, source, title, description }: Props) => {
+const ImageCard = ({ style, url, title, description }: Props) => {
   return (
     <View style={[styles.base, style]}>
-      <Image containerStyle={styles.image} source={source} resizeMode="cover" />
+      <Image containerStyle={styles.image} url={url} resizeMode="cover" />
       <View style={styles.textContainer}>
         <Text style={styles.title} numberOfLines={1}>
           {title.toUpperCase()}

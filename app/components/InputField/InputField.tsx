@@ -1,25 +1,24 @@
-/* eslint-disable react-native/no-color-literals */
 import React, { Fragment, useState } from "react"
-import { StyleSheet, TouchableOpacity, TextInput, View } from "react-native"
-import { FastImageProps } from "react-native-fast-image"
+import { StyleSheet, TouchableOpacity, TextInput, Image as RNIImage } from "react-native"
 import Image from "../Image"
-const uploadIcon = require("./Upload.png")
 
+const uploadIcon = require("./Upload.png")
+const { uri: uploadIconUrl } = RNIImage.resolveAssetSource(uploadIcon)
 interface Props {
-  source: FastImageProps["source"] | null
+  url: string | null
   onPress: () => void
 }
-const InputField = ({ source, onPress }: Props) => {
+const InputField = ({ url, onPress }: Props) => {
   const [name, setName] = useState("")
   const [focus, setFocus] = useState(false)
 
   return (
     <Fragment>
       <TouchableOpacity activeOpacity={0.7} style={styles.base} onPress={onPress}>
-        {source ? (
-          <Image source={source} resizeMode="cover" />
+        {url ? (
+          <Image url={url} resizeMode="cover" />
         ) : (
-          <Image containerStyle={styles.uploadIcon} source={uploadIcon} resizeMode="contain" />
+          <Image containerStyle={styles.uploadIcon} url={uploadIconUrl} resizeMode="contain" />
         )}
       </TouchableOpacity>
       <TextInput

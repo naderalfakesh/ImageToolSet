@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-unused-styles */
 import React from "react"
-import { StyleSheet, View, ViewStyle } from "react-native"
+import { StyleSheet, ViewStyle } from "react-native"
 import { FastImageProps } from "react-native-fast-image"
 import Image from "../Image"
 
@@ -9,7 +9,7 @@ const MEDIUM_SIZE = 65
 const SMALL_SIZE = 40
 
 interface Props {
-  source: FastImageProps["source"]
+  url: string
   resizeMode?: FastImageProps["resizeMode"]
   style?: ViewStyle
   size?: "small" | "medium" | "large"
@@ -19,7 +19,7 @@ interface Props {
 
 const Avatar = ({
   style,
-  source,
+  url,
   resizeMode = "contain",
   size = "medium",
   shape = "square",
@@ -28,7 +28,7 @@ const Avatar = ({
   return (
     <Image
       containerStyle={[styles.base, sizeStyle[size], shapeStyle(shape, size), style]}
-      source={source}
+      url={url}
       resizeMode={resizeMode}
       onPress={onPress}
     />

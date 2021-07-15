@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-color-literals */
 import React, { useState } from "react"
 import { ActivityIndicator, StyleSheet, TouchableOpacity, ViewStyle } from "react-native"
 import FastImage, { FastImageProps, OnLoadEvent } from "react-native-fast-image"
@@ -6,11 +5,12 @@ import FastImage, { FastImageProps, OnLoadEvent } from "react-native-fast-image"
 const BG_COLOR = "rgba(240, 242, 245, 1)"
 const LOADER_COLOR = "rgba(55, 107, 251, 1)"
 
-interface Props extends FastImageProps {
-  onPress?: () => void
+interface Props extends Omit<FastImageProps, "source"> {
+  url: string
   containerStyle?: ViewStyle | ViewStyle[]
+  onPress?: () => void
 }
-const Image = ({ style, containerStyle, onPress, onLoad, ...restProps }: Props) => {
+const Image = ({ containerStyle, url, onPress, onLoad, style, ...restProps }: Props) => {
   const [loaded, setLoaded] = useState(false)
   const handleLoading = (event: OnLoadEvent) => {
     setLoaded(true)
@@ -18,7 +18,12 @@ const Image = ({ style, containerStyle, onPress, onLoad, ...restProps }: Props) 
   }
   return (
     <TouchableOpacity style={[styles.base, containerStyle]} onPress={onPress} disabled={!onPress}>
-      <FastImage style={[styles.base, style]} onLoad={handleLoading} {...restProps} />
+      <FastImage
+        style={[styles.base, style]}
+        onLoad={handleLoading}
+        source={{ uri: url }}
+        {...restProps}
+      />
       {!loaded && <ActivityIndicator color={LOADER_COLOR} style={styles.loader} />}
     </TouchableOpacity>
   )
