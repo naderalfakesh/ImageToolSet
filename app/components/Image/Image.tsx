@@ -8,9 +8,18 @@ const LOADER_COLOR = "rgba(55, 107, 251, 1)"
 interface Props extends Omit<FastImageProps, "source"> {
   url: string
   containerStyle?: ViewStyle | ViewStyle[]
+  loaderSize?: "small" | "large"
   onPress?: () => void
 }
-const Image = ({ containerStyle, url, onPress, onLoad, style, ...restProps }: Props) => {
+const Image = ({
+  containerStyle,
+  url,
+  onPress,
+  onLoad,
+  style,
+  loaderSize,
+  ...restProps
+}: Props) => {
   const [loaded, setLoaded] = useState(false)
   const handleLoading = (event: OnLoadEvent) => {
     setLoaded(true)
@@ -24,7 +33,9 @@ const Image = ({ containerStyle, url, onPress, onLoad, style, ...restProps }: Pr
         source={{ uri: url }}
         {...restProps}
       />
-      {!loaded && <ActivityIndicator color={LOADER_COLOR} style={styles.loader} />}
+      {!loaded && (
+        <ActivityIndicator color={LOADER_COLOR} style={styles.loader} size={loaderSize} />
+      )}
     </TouchableOpacity>
   )
 }

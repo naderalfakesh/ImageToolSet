@@ -24,6 +24,7 @@ const getImages = ({ term = null, page = 1, perPage = 1, orientation = "portrait
 const ImageMapper = (image: photoResource): Photo => ({
   id: image.id,
   url: image.src.medium,
+  urlLarge: image.src.large,
   title: image.photographer,
 })
 
@@ -73,11 +74,7 @@ const usePexels = () => {
         orientation: "portrait",
       })
 
-      const imageList = response.data.photos.map((item) => ({
-        id: item.id,
-        url: item.src.medium,
-        title: item.photographer,
-      }))
+      const imageList = response.data.photos.map(ImageMapper)
       setMobile(imageList)
     } catch (error) {
       setError(error)

@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { Dimensions, Modal, StyleSheet, View, Text, StatusBar } from "react-native"
+import { OnLoadEvent } from "react-native-fast-image"
 import ImageZoom from "react-native-image-pan-zoom"
 import Image from "../Image"
 
@@ -8,36 +9,54 @@ interface Props {
   title: string
   visible: boolean
   onClose: () => void
-  onPress: () => void
 }
 
-const ImageViewer = ({ url, visible, title, onClose, onPress }: Props) => {
+const ImageViewer = ({ url, visible, title, onClose }: Props) => {
   const [imageSize, setImageSize] = useState({ width: 0, height: 0 })
+  const screenWidth = Dimensions.get("window").width
+  const screenHeight = Dimensions.get("window").height
+
+  const calculateImageSize = ({ nativeEvent }: OnLoadEvent) => {
+    let width = nativeEvent.width
+    let height = nativeEvent.height
+
+    // If image width is bigger than image zoom ratio will be image width
+    if (width > screenWidth) {
+      const widthPixel = screenWidth / width
+      width *= widthPixel
+      height *= widthPixel
+    }
+
+    // If image height is still bigger than image zoom ratio will be image height
+    if (height > screenHeight) {
+      const HeightPixel = screenHeight / height
+      width *= HeightPixel
+      height *= HeightPixel
+    }
+
+    setImageSize({ height, width })
+  }
 
   return (
     <Modal visible={visible} onRequestClose={onClose} statusBarTranslucent animationType="slide">
       <StatusBar barStyle="light-content" />
       <View style={styles.header}>
-        <Text style={styles.BackText} onPress={onPress}>
+        <Text style={styles.BackText} onPress={onClose}>
           {"< Back"}
         </Text>
-        <Text style={styles.headerText}>{title}</Text>
+        <Text numberOfLines={1} ellipsizeMode="middle" style={styles.headerText}>
+          {title}
+        </Text>
       </View>
       <ImageZoom
         style={styles.container}
-        cropWidth={Dimensions.get("window").width}
-        cropHeight={Dimensions.get("window").height}
+        cropWidth={screenWidth}
+        cropHeight={screenHeight}
         imageWidth={imageSize.width}
         imageHeight={imageSize.height}
         maxOverflow={0}
       >
-        <Image
-          url={url}
-          resizeMode="contain"
-          onLoad={({ nativeEvent: { height, width } }) => {
-            setImageSize({ height, width })
-          }}
-        />
+        <Image url={url} resizeMode="contain" loaderSize="large" onLoad={calculateImageSize} />
       </ImageZoom>
     </Modal>
   )
@@ -73,7 +92,10 @@ const styles = StyleSheet.create({
   },
   headerText: {
     color: TEXT_COLOR,
+    flex: 1,
     fontSize: 16,
     lineHeight: 24,
+    paddingLeft: 12,
+    paddingRight: 6,
   },
 })

@@ -5,7 +5,7 @@ import { Photo } from "./types"
 
 interface Props {
   images: Photo[]
-  onImagePress?: (id) => void
+  onImagePress: (image: Photo) => void
 }
 
 const FruitsList = ({ images, onImagePress }: Props) => {
@@ -23,7 +23,7 @@ const FruitsList = ({ images, onImagePress }: Props) => {
             key={item.id}
             url={item.url}
             caption={item.title}
-            onPress={() => onImagePress(item.id)}
+            onPress={() => onImagePress(item)}
           />
         )}
       />
