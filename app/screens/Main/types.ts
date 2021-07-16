@@ -7,7 +7,14 @@ export type Photo = {
 
 export type photoResource = {
   id: string
-  src: { medium: string; large: string }
+  src: {
+    medium: string
+    large: string
+    large2x: string
+    original: string
+    portrait: string
+    landscape: string
+  }
   photographer: string
 }
 

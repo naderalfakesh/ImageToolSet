@@ -9,7 +9,7 @@ import usePexels from "./usePexels"
 import ImageViewer from "../../components/ImageViewer"
 import { Photo } from "./types"
 
-const BG_URL = "https://picsum.photos/id/6/800/600"
+const BG_URL = "https://picsum.photos/id/370/800/600"
 
 export const MainScreen = () => {
   const [modalVisible, setModalVisible] = useState(false)

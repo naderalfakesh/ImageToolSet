@@ -24,7 +24,7 @@ const getImages = ({ term = null, page = 1, perPage = 1, orientation = "portrait
 const ImageMapper = (image: photoResource): Photo => ({
   id: image.id,
   url: image.src.medium,
-  urlLarge: image.src.large,
+  urlLarge: image.src.portrait,
   title: image.photographer,
 })
 
@@ -53,7 +53,12 @@ const usePexels = () => {
     try {
       setLoading(true)
       const page = getRandomPage()
-      const response = await getImages({ term: "fruit", page, perPage: 12, orientation: "square" })
+      const response = await getImages({
+        term: "fruit",
+        page,
+        perPage: 12,
+        orientation: "portrait",
+      })
       const imageList = response.data.photos.map(ImageMapper)
       setFruits(imageList)
     } catch (error) {
