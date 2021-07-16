@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
 import { create } from "apisauce"
 import { photoResource, Photo, PexelsResponse } from "./types"
+const { API_KEY } = require("../../config/env")
 
+console.log(API_KEY || "not found")
 const getRandomPage = () => Math.floor(Math.random() * 10)
 const api = create({
   baseURL: "https://api.pexels.com/v1",
-  headers: { Authorization: "563492ad6f9170000100000139ce4ec75dae47ff995f05134859c51b" },
+  headers: { Authorization: API_KEY },
 })
 interface Params {
   term?: string
