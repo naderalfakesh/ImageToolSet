@@ -33,3 +33,5 @@ From the command line in your generated app's root directory, enter `yarn run st
 This starts up the storybook server and opens a story navigator in your browser. With your app
 running, choose Toggle Storybook from the developer menu to switch to Storybook; you can then
 use the story navigator in your browser to change stories.
+
+![](https://visitor-badge.glitch.me/badge?page_id=naderalfakesh.ImageToolSet)
