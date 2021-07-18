@@ -11,7 +11,9 @@ This time I wanted to checkout infinite red ignite boilerplate (amazing btw).
 
 All you need to check is the app/components folder which has all the components written with typescript and storybook stories as well.
 
-![Demo view of the final project](assets/repo/demo.png)
+<p align="center">
+<img src="assets/repo/demo.png" alt="Demo view of the final project" />
+</p>
 
 ## Installing and running the project locally
 
